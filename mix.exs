@@ -5,7 +5,7 @@ defmodule Mailchan.Mixfile do
     [
       app: :mailchan,
       version: "0.0.1",
-      elixir: "~> 1.4",
+      elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
@@ -37,7 +37,9 @@ defmodule Mailchan.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:gen_smtp, "~> 0.12.0"},
+      {:ksuid, "~> 0.1.2"}
     ]
   end
 end
