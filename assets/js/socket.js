@@ -62,7 +62,7 @@ let emailContainer = document.querySelector("#emails")
 
 channel.on("new_mail", payload => {
   let messageItem = document.createElement("li");
-  messageItem.innerText = `[${Date()}] ${payload.body}`
+  messageItem.innerText = `[${Date()}] ${payload.data}`
   emailContainer.appendChild(messageItem)
 })
 

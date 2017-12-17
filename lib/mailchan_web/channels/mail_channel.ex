@@ -11,13 +11,7 @@ defmodule MailchanWeb.MailChannel do
     {:noreply, socket}
   end
 
-
   def handle_info(_message, socket) do
     {:noreply, socket}
   end
-
-  # def handle_in("new_mail", %{"data" => data}, socket) do
-  #   push socket, "new_mail", %{data: data}
-  #   {:noreply, socket}
-  # end
 end
