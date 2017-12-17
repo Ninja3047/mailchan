@@ -11,7 +11,6 @@ defmodule MailchanWeb.Router do
   end
 
   defp put_user_token(conn, params) do
-    require IEx; IEx.pry
     if current_user = conn.assigns[:current_user] do
       token = Phoenix.Token.sign(conn, "email socket", current_user.id)
       assign(conn, :user_token, token)

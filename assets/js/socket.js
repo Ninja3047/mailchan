@@ -65,8 +65,4 @@ channel.on("new_mail", payload => {
   messageItem.innerText = `[${Date()}] ${payload.data}`
   emailContainer.appendChild(messageItem)
 })
-
-channel.push("new_mail", {body: "foobar"})
-.receive("ok", (msg) => console.log("created message", msg) )
-
 export default socket

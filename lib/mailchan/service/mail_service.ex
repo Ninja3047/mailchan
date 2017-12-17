@@ -9,7 +9,7 @@ defmodule Mailchan.MailService do
   Also initializes a process to listen for email on this id.
 """
   def initialize_email(email_id) do
-    "#{email_id}@baited.me"
+    "#{email_id}@mailchan.moe"
   end
 
   def receive_message(from, to, data) do
