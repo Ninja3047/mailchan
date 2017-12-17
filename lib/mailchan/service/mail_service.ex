@@ -1,4 +1,5 @@
 defmodule Mailchan.MailService do
+  require Logger
 @moduledoc """
   Defines a set of service functions for managing mail
 """
@@ -8,20 +9,18 @@ defmodule Mailchan.MailService do
   Also initializes a process to listen for email on this id.
 """
   def initialize_email(email_id) do
-    email_address = "#{email_id}@baited.me"
-    initialize_email_listener(email_address)
-    email_address
-  end
-
-  @doc """
-    Initializes a process to listen for emails for the given email address.
-  """
-  defp initialize_email_listener(email_address) do
-    # todo
+    "#{email_id}@baited.me"
   end
 
   def receive_message(from, to, data) do
     IO.puts("YOU GOT MAIL from:#{from} to:#{to} data:#{data}")
-    :ets.insert(:emails, {Ksuid.generate(), to, from, data})
+    client_id = to |> String.split("@") |> hd
+    case :ets.lookup(:sessions, client_id) do
+      [] ->
+        Logger.warn("Could not find session for this email #{to}")
+        nil
+      [{_, socket, _}] ->
+        Phoenix.Channel.push socket, "new_mail", %{"data" => data}
+    end
   end
 end
