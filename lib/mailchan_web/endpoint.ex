@@ -1,7 +1,7 @@
 defmodule MailchanWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :mailchan
 
-  socket "/socket", MailchanWeb.UserSocket
+  socket "/mail", MailchanWeb.MailSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #

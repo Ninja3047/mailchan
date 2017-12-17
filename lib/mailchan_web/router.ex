@@ -7,6 +7,16 @@ defmodule MailchanWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :put_user_token
+  end
+
+  defp put_user_token(conn, params) do
+    if current_user = conn.assigns[:current_user] do
+      token = Phoenix.Token.sign(conn, "email socket", current_user.id)
+      assign(conn, :user_token, token)
+    else
+      conn
+    end
   end
 
   pipeline :api do
@@ -16,7 +26,8 @@ defmodule MailchanWeb.Router do
   scope "/", MailchanWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", MailController, :index
+    get "/mail/:email_id", MailController, :mail
   end
 
   # Other scopes may use custom stacks.
