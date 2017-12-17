@@ -1,8 +1,8 @@
-defmodule MailchanWeb.UserSocket do
+defmodule MailchanWeb.MailSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", MailchanWeb.RoomChannel
+  channel "mail:*", MailchanWeb.MailChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

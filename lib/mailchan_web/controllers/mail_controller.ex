@@ -7,6 +7,6 @@ defmodule MailchanWeb.MailController do
 
   def mail(conn, %{"email_id" => email_id}) do
     ## create email address for this id
-    text(conn, "ID: #{email_id}")
+    render conn, "index.html"
   end
 end

@@ -22,5 +22,6 @@ defmodule Mailchan.MailService do
 
   def receive_message(from, to, data) do
     IO.puts("YOU GOT MAIL from:#{from} to:#{to} data:#{data}")
+    :ets.insert(:emails, {Ksuid.generate(), to, from, data})
   end
 end
