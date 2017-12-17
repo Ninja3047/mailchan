@@ -5,8 +5,8 @@ defmodule MailchanWeb.MailSessionManager do
 
   ## Client API
   ## monitors this user's emails session.
-  def monitor(server_name, pid, client_id, socket) do
-    GenServer.call(server_name, {:monitor, pid, client_id, socket})
+  def monitor(server_name, pid, mail_id, socket) do
+    GenServer.call(server_name, {:monitor, pid, mail_id, socket})
   end
 
   ## Server API
@@ -20,9 +20,9 @@ defmodule MailchanWeb.MailSessionManager do
     {:ok, %{}}
   end
 
-  def handle_call({:monitor, pid, client_id, socket}, _from, state) do
+  def handle_call({:monitor, pid, mail_id, socket}, _from, state) do
     Process.link(pid)
-    :ets.insert(:sessions, {client_id, socket, pid})
+    :ets.insert(:sessions, {mail_id, socket, pid})
     {:reply, :ok, state}
   end
 
@@ -30,8 +30,8 @@ defmodule MailchanWeb.MailSessionManager do
     case :ets.match_object(:sessions, {:_, :_, pid}) do
       [] ->
         {:noreply, state}
-      [{client_id, _, _}] ->
-        :ets.delete(:sessions, client_id)
+      [{mail_id, _, _}] ->
+        :ets.delete(:sessions, mail_id)
         {:noreply, state}
     end
   end

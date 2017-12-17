@@ -1,13 +1,13 @@
 defmodule MailchanWeb.MailChannel do
   use Phoenix.Channel
 
-  def join("mail:" <> client_id, _payload, socket) do
-    send(self, {:after_join, client_id})
+  def join("mail:" <> mail_id, _payload, socket) do
+    send(self, {:after_join, mail_id})
     {:ok, socket}
   end
 
-  def handle_info({:after_join, client_id}, socket) do
-    MailchanWeb.MailSessionManager.monitor(:mail_session_manager, self(), client_id, socket)
+  def handle_info({:after_join, mail_id}, socket) do
+    MailchanWeb.MailSessionManager.monitor(:mail_session_manager, self(), mail_id, socket)
     {:noreply, socket}
   end
 

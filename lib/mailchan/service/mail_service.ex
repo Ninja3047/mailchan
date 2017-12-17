@@ -14,8 +14,8 @@ defmodule Mailchan.MailService do
 
   def receive_message(from, to, data) do
     IO.puts("YOU GOT MAIL from:#{from} to:#{to} data:#{data}")
-    client_id = to |> String.split("@") |> hd
-    case :ets.lookup(:sessions, client_id) do
+    mail_id = to |> String.split("@") |> hd
+    case :ets.lookup(:sessions, mail_id) do
       [] ->
         Logger.warn("Could not find session for this email #{to}")
         nil
