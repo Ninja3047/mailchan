@@ -60,9 +60,13 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 let emailContainer = document.querySelector("#emails")
 
-channel.on("new_email", payload => {
+channel.on("new_mail", payload => {
   let messageItem = document.createElement("li");
   messageItem.innerText = `[${Date()}] ${payload.body}`
-  emailList.appendChild(messageItem)
+  emailContainer.appendChild(messageItem)
 })
+
+channel.push("new_mail", {body: "foobar"})
+.receive("ok", (msg) => console.log("created message", msg) )
+
 export default socket

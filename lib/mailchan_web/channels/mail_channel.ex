@@ -1,6 +1,7 @@
 defmodule MailchanWeb.MailChannel do
   use Phoenix.Channel
-  def join("mail" <> _client_id, _payload, socket) do
+  def join("mail" <> client_id, _payload, socket) do
+    MailchanWeb.MailSessionManager.monitor(:mail_session_manager, self(), client_id, socket)
     {:ok, socket}
   end
 
@@ -8,4 +9,8 @@ defmodule MailchanWeb.MailChannel do
     {:noreply, socket}
   end
 
+  def handle_in("new_mail", params, socket) do
+    broadcast! socket, "new_mail", %{data: params["body"]}
+    {:noreply, socket}
+  end
 end

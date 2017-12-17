@@ -13,7 +13,8 @@ defmodule Mailchan.Application do
       # Start your own worker by calling: Mailchan.Worker.start_link(arg1, arg2, arg3)
       # worker(Mailchan.Worker, [arg1, arg2, arg3]),
       #TODO: change port l8er
-      worker(:gen_smtp_server, [Mailchan.MailServiceCallback, [[{:port, 2525}]]])
+      worker(:gen_smtp_server, [Mailchan.MailServiceCallback, [[{:port, 2525}]]]),
+      worker(MailchanWeb.MailSessionManager, [:mail_session_manager])
     ]
     initialize_database()
 
@@ -26,6 +27,7 @@ defmodule Mailchan.Application do
   defp initialize_database() do
     ## using ets for now
     :ets.new(:emails, [:set, :public, :named_table])
+    :ets.new(:sessions, [:set, :public, :named_table])
   end
 
   # Tell Phoenix to update the endpoint configuration
