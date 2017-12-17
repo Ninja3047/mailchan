@@ -12,7 +12,7 @@ defmodule Mailchan.Application do
       supervisor(MailchanWeb.Endpoint, []),
       # Start your own worker by calling: Mailchan.Worker.start_link(arg1, arg2, arg3)
       # worker(Mailchan.Worker, [arg1, arg2, arg3]),
-      worker(:gen_smtp_server, [Mailchan.MailServiceCallback, [[]]])
+      worker(:gen_smtp_server, [Mailchan.MailServiceCallback, [[{:port, 25}]]])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
