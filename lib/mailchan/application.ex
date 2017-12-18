@@ -12,8 +12,7 @@ defmodule Mailchan.Application do
       supervisor(MailchanWeb.Endpoint, []),
       # Start your own worker by calling: Mailchan.Worker.start_link(arg1, arg2, arg3)
       # worker(Mailchan.Worker, [arg1, arg2, arg3]),
-      #TODO: change port l8er
-      worker(:gen_smtp_server, [Mailchan.MailServiceCallback, [[{:port, 2525}]]]),
+      worker(:gen_smtp_server, [Mailchan.MailServiceCallback, [[{:port, 25}]]]),
       worker(MailchanWeb.MailSessionManager, [:mail_session_manager])
     ]
     initialize_database()

@@ -4,7 +4,10 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/web/endpoint.ex":
 import {Socket} from "phoenix"
-
+window.getCookie = function(name) {
+  let match = document.cookie.match(new RegExp(name + '=([^;]+)'));
+  if (match) return match[1];
+}
 let socket = new Socket("/mail", {params: {token: window.userToken}})
 
 // When you connect, you'll often need to authenticate the client.
@@ -54,7 +57,7 @@ let socket = new Socket("/mail", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("mail:abc123", {})
+let channel = socket.channel("mail:" + window.getCookie("mail_id"), {})
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })

@@ -1,1 +1,2 @@
+YOUR EMAIL: <%= @email %>
 <div id="emails"></div>

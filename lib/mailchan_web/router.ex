@@ -12,7 +12,7 @@ defmodule MailchanWeb.Router do
 
   defp put_user_token(conn, params) do
     if current_user = conn.assigns[:current_user] do
-      token = Phoenix.Token.sign(conn, "email socket", current_user.id)
+      token = Phoenix.Token.sign(conn, "mail socket", current_user.id)
       assign(conn, :user_token, token)
     else
       conn
@@ -27,7 +27,7 @@ defmodule MailchanWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", MailController, :index
-    get "/mail/:email_id", MailController, :mail
+    get "/mail/:mail_id", MailController, :mail
   end
 
   # Other scopes may use custom stacks.
