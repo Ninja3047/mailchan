@@ -6,14 +6,13 @@ defmodule Mailchan.MailService do
 
 @doc """
   Creates an email address for the given id.
-  Also initializes a process to listen for email on this id.
 """
   def initialize_email(email_id) do
     "#{email_id}@mailchan.moe"
   end
 
   def receive_message(from, to, data) do
-    IO.puts("YOU GOT MAIL from:#{from} to:#{to} data:#{data}")
+    Logger.debug("YOU GOT MAIL from:#{from} to:#{to} data:#{data}")
     mail_id = to |> hd |> String.split("@") |> hd
     case :ets.lookup(:sessions, mail_id) do
       [] ->

@@ -68,4 +68,9 @@ channel.on("new_mail", payload => {
   messageItem.innerText = `[${Date()}] ${payload.data}`
   emailContainer.appendChild(messageItem)
 })
+channel.on("end_session", payload => {
+  console.log("terminating session")
+  channel.leave()
+})
+channel.onClose( () => console.log("the channel has gone away gracefully") )
 export default socket
