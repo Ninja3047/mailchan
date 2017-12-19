@@ -1,12 +1,12 @@
 defmodule Mailchan.MailService do
   require Logger
-@moduledoc """
-  Defines a set of service functions for managing mail
-"""
+  @moduledoc """
+    Defines a set of service functions for managing mail
+  """
 
-@doc """
-  Creates an email address for the given id.
-"""
+  @doc """
+    Creates an email address for the given id.
+  """
   def initialize_email(email_id) do
     "#{email_id}@mailchan.moe"
   end

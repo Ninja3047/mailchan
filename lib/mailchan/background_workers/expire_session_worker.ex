@@ -30,7 +30,7 @@ defmodule Mailchan.ExpireSessionWorker do
     session_list
     |> Enum.each(fn ([mail_id, _, pid, _]) ->
       Logger.error("terminating session for #{mail_id}")
-      MailchanWeb.MailSessionManager.unmonitor(:mail_session_manager, mail_id, pid)
+      Mailchan.MailSessionManager.unmonitor(:mail_session_manager, mail_id, pid)
     end)
   end
 

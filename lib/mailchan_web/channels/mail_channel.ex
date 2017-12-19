@@ -8,7 +8,7 @@ defmodule MailchanWeb.MailChannel do
   end
 
   def handle_info({:after_join, mail_id}, socket) do
-    MailchanWeb.MailSessionManager.monitor(:mail_session_manager, self(), mail_id, socket)
+    Mailchan.MailSessionManager.monitor(:mail_session_manager, self(), mail_id, socket)
     {:noreply, socket}
   end
 

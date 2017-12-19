@@ -1,4 +1,4 @@
-defmodule MailchanWeb.MailSessionManager do
+defmodule Mailchan.MailSessionManager do
   use GenServer
 
   ## state is essentially the ETS table :session.
