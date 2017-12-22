@@ -1,5 +1,7 @@
 # Mailchan
 
+[![Build Status](https://jenkins.baited.me/job/Mailchan/badge/icon)](https://jenkins.baited.me/job/Mailchan/)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
