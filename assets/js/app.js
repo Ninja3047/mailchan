@@ -18,4 +18,19 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-import socket from "./socket"
+import {Socket} from "phoenix"
+
+import React from "react"
+import ReactDOM from "react-dom"
+import {MailBox} from "./components/mailbox"
+
+window.getCookie = (name) => {
+    let match = document.cookie.match(new RegExp(name + '=([^;]+)'));
+    return match ? match[1] : null;
+};
+
+let socket = new Socket("/mail", {params: {token: window.userToken}});
+socket.connect();
+
+let channel = socket.channel("mail:" + window.getCookie("mail_id"), {});
+ReactDOM.render(<MailBox channel={channel} />, document.getElementById('emails'));
