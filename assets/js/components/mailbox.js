@@ -9,7 +9,7 @@ export default class MailBox extends React.Component {
     }
 
     onMail(mail) {
-        this.state.mail.push(mail);
+        this.setState({mail: [...this.state.mail, mail]});
     }
 
     componentDidMount() {
